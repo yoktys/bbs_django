@@ -1,0 +1,28 @@
+{% extends "forum/base.html" %}
+
+{% block sidebar %} {% endblock %}
+
+{% block content %}
+<div class="main">
+  <div id="list">
+    <table border="0" cellpadding="4" width="100%">
+      <tr>
+        <td></td>
+        <td>Posts</td>
+        <td>Last post</td>
+        <td></td>
+      </tr>
+      {% for forum in object_list %}
+      <tr>
+        <td {% if forloop.last %}class="last"{% endif %}><a href="{% url forum_thread_list_view forum.pk %}">{{ forum.title }}</a></td>
+        <td {% if forloop.last %}class="last"{% endif %}>{{ forum.num_posts }}</td>
+        <td {% if forloop.last %}class="last"{% endif %}>{{ forum.last_post.short|linebreaksbr }}</td>
+        <td {% if forloop.last %}class="last"{% endif %}>
+          <a class="button" href="{% url forum_thread_list_view forum.pk %}">VIEW</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}

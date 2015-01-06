@@ -1,0 +1,12 @@
+*.o
+*.i
+*.ii
+*.pyc
+*.egg
+*.egg-info
+
+# local environments
+local.py
+
+# os x
+.DS_Store

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+{% load staticfiles %}
+<head>
+  <title>{% block title %}ForumApp{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}" type="text/css" media="screen" charset="utf-8" />
+</head>
+
+<body>
+  <div id="sidebar"> {% block sidebar %} {% endblock %} </div>
+  <div id="container">
+    <div id="menu">
+      {% block nav-global %}
+
+      {% comment %} === MENU === {% endcomment %}
+      <h3><a href="/">ForumApp</a></h3>
+
+      {% if user.is_staff %} <a href="{% url admin:index %}">Admin</a> {% endif %}
+      {% if user.is_authenticated %}
+      <a href="{% url profile_view user.pk %}">Profile</a> {% endif %}
+
+      {% if not user.is_authenticated %}<a href="/accounts/login/?next=/">login</a> | <a href="/accounts/register/">register</a>{% endif %}
+
+      {% if user.is_authenticated %}<a href="/accounts/logout/?next=/">logout</a>
+      {% endif %}
+
+      {% endblock %}
+    </div>
+
+    <div id="content">
+      {% block content %}{% endblock %}
+    </div>
+  </div>
+
+</body>
+</html>
